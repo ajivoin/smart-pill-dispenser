@@ -1,4 +1,5 @@
+# frozen_string_literal: true
+
 class ScheduleController < ActionController::Base
-  def show
-  end
+  def show; end
 end

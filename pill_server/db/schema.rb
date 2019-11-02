@@ -12,8 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2019_11_02_191414) do
 
-# Could not dump table "histories" because of following StandardError
-#   Unknown type 'reference' for column 'schedule'
+  create_table "histories", force: :cascade do |t|
+    t.integer "week"
+    t.boolean "taken"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "schedule_id"
+    t.index ["schedule_id"], name: "index_histories_on_schedule_id"
+  end
 
   create_table "pills", force: :cascade do |t|
     t.string "name"
