@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddPillToSchedules < ActiveRecord::Migration[5.2]
   def change
     add_reference :schedules, :pill, foreign_key: true
