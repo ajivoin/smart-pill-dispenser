@@ -1,4 +1,4 @@
-class ScheduleController < ActionController::Base
+class ScheduleController < ApplicationController
   def show
   end
 
