@@ -10,23 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_02_181352) do
+ActiveRecord::Schema.define(version: 2019_11_02_191414) do
 
-  create_table "histories", force: :cascade do |t|
-    t.boolean "taken"
-    t.integer "week_number"
-  end
+# Could not dump table "histories" because of following StandardError
+#   Unknown type 'reference' for column 'schedule'
 
   create_table "pills", force: :cascade do |t|
     t.string "name"
     t.integer "count"
-    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.integer "day"
     t.integer "time"
+    t.integer "day0"
+    t.integer "day1"
+    t.integer "day2"
+    t.integer "day3"
+    t.integer "day4"
+    t.integer "day5"
+    t.integer "day6"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "pill_id"
+    t.boolean "active"
     t.index ["pill_id"], name: "index_schedules_on_pill_id"
   end
 
