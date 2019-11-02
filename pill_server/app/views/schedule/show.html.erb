@@ -1,1 +1,63 @@
-<h1>Hi!</h1>
+
+<% Pill.all.each_with_index do |p, i| %>
+    <%= p.name %> - <%= p.count %>
+    <table>
+        <tr>
+            <th>Time</th>
+            <th>S</th>
+            <th>M</th>
+            <th>T</th>
+            <th>W</th>
+            <th>Th</th>
+            <th>F</th>
+            <th>S</th>
+            <th></th>
+        </tr>
+        <% p.schedules.sort_by{|x| x.time }.each do |s| %>
+            <tr class="s-show" id="s-show-<%= s.id %>">
+                <td><%= time_format(s.time) %></td>
+                <td><%= s.day0 %></td>
+                <td><%= s.day1 %></td>
+                <td><%= s.day2 %></td>
+                <td><%= s.day3 %></td>
+                <td><%= s.day4 %></td>
+                <td><%= s.day5 %></td>[:'time(4i)']
+                <td><%= s.day6 %></td>
+                <td><a onClick="editSchedule(<%= s.id %>)">edit</a></td>
+            </tr>
+            
+            <tr class="s-edit hidden" id="s-edit-<%= s.id %>">
+                <%= form_with(url: "/schedule/#{s.id}", method: "post") do |f|%>
+                    <td><%= f.time_select :time, default: {hour: h_format(s.time), min: m_format(s.time)} %></td>
+                    <td><%= number_field_tag('day0', "#{s.day0}") %></td>
+                    <td><%= number_field_tag('day1', "#{s.day1}") %></td>
+                    <td><%= number_field_tag('day2', "#{s.day2}") %></td>
+                    <td><%= number_field_tag('day3', "#{s.day3}") %></td>
+                    <td><%= number_field_tag('day4', "#{s.day4}") %></td>
+                    <td><%= number_field_tag('day5', "#{s.day5}") %></td>
+                    <td><%= number_field_tag('day6', "#{s.day6}") %></td>
+                    <td><%= submit_tag("save") %></td>
+                    <td><a onClick="cancelScheduleEdit(<%= s.id %>)">cancel</a></td>
+                <% end %>
+            </tr>
+        <% end %>
+    </table>
+<% end %>
+
+<script>
+    function editSchedule(id) {
+        document.getElementById("s-show-"+id).classList.add("hidden");
+        document.getElementById("s-edit-"+id).classList.remove("hidden");
+    }
+
+    function cancelScheduleEdit(id) {
+        document.getElementById("s-edit-"+id).classList.add("hidden");
+        document.getElementById("s-show-"+id).classList.remove("hidden");
+    }
+</script>
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
