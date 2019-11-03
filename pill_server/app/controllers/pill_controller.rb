@@ -4,7 +4,7 @@ class PillController < ApplicationController
 
     def get_pill_counts
         first_4 = JonnyBoi.first(4)
-        data = [0, 0, 0, 0]
+        data = [-1, -1, -1, -1]
         first_4.each_with_index do |jonny_boi, i|
             data[i] = jonny_boi.count
             JonnyBoi.destroy(jonny_boi.id)
