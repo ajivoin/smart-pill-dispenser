@@ -14,6 +14,7 @@ class ScheduleController < ApplicationController
     @schedule.day4 = params[:day4]
     @schedule.day5 = params[:day5]
     @schedule.day6 = params[:day6]
+    @schedule.active = true
     @schedule.save
     redirect_to root_url('Xforce_reload': 'trueX', pill: @schedule.pill.id)
   end
@@ -29,6 +30,7 @@ class ScheduleController < ApplicationController
     @schedule.day4 = params[:day4]
     @schedule.day5 = params[:day5]
     @schedule.day6 = params[:day6]
+    @schedule.active = true
     @schedule.save
     redirect_to root_url('Xforce_reload': 'trueX', pill: @schedule.pill.id)
   end

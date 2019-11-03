@@ -8,10 +8,12 @@ namespace :batch do
   task send_messages: :environment do
     time = in_our_timezone(Time.now)
     # When live, switch to commented out line
-    current_minutes = (time.seconds_since_midnight / 60).to_i
+    current_minutes = (time.seconds_since_midnight / 60).to_i - 60
+    puts 'current_min' + current_minutes.to_s
     # current_minutes = 24 * 60 / 2 # hard coded to noon because I want to test stuff
 
     active_schedules = Schedule.where(active: true, time: current_minutes)
+    print active_schedules.length
     
     # Send message out for pills that are now ready
     message = ""
@@ -34,7 +36,6 @@ namespace :batch do
         )
       end
       message.chomp!
-      text_to_take_pills(message)
     end
 
     print "Finding reminders\n"
@@ -61,7 +62,7 @@ namespace :batch do
         message += history.pill.name + "\n"
       end
       message.chomp!
-      text_to_take_pills(message)
     end
+    text_to_take_pills(message) if message.present?
   end
 end
