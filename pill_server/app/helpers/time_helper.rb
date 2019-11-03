@@ -14,4 +14,8 @@ module TimeHelper
     def m_format(num)
         (num % 60).to_s
     end
+
+    def day_of_week(num)
+        num == Time.now.wday
+    end      
 end

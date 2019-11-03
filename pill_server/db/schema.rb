@@ -10,16 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_02_191414) do
-
-# Could not dump table "histories" because of following StandardError
-#   Unknown type 'reference' for column 'schedule'
+ActiveRecord::Schema.define(version: 2019_11_02_234046) do
 
   create_table "pills", force: :cascade do |t|
     t.string "name"
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "desc"
   end
 
   create_table "schedules", force: :cascade do |t|
