@@ -72,3 +72,6 @@ gem 'whenever'
 
 # rubocop
 gem 'rubocop'
+
+# Twilio
+gem 'twilio-ruby'

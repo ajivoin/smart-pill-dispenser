@@ -3,4 +3,7 @@
 class ScheduleController < ApplicationController
   def show
   end
+
+  def reply
+  end
 end

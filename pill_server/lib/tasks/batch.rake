@@ -1,4 +1,5 @@
-# frozen_string_literal: true
+require "#{Rails.root}/app/helpers/application_helper"
+include ApplicationHelper
 
 namespace :batch do
   desc 'Send text notifications when pills are ready to take'
@@ -12,7 +13,7 @@ namespace :batch do
     
     # Send message out for pills that are now ready
 
-    if active_schedules.length
+    if active_schedules.present?
       message = "The following pills are ready:\n"
       active_schedules.each do |schedule|
         message += schedule.pill.name + "\n"
@@ -24,6 +25,7 @@ namespace :batch do
         )
       end
       message.chomp!
+      text_to_take_pills(message)
     end
 
     print "Finding reminders\n"
@@ -32,20 +34,20 @@ namespace :batch do
 
     reminder_schedules = Schedule.where(active: true, time: current_minutes - 1)
 
-    if reminder_schedules.length
+    if reminder_schedules.present?
       potential_reminders = History.where(
         taken: false,
         schedule: reminder_schedules
       )
     end
 
-    if potential_reminders.length
+    if potential_reminders.present?
       message += "\n\nYou still haven't taken these pills:\n"
       potential_reminders.each do |history|
         message += history.schedule.pill.name + "\n"
       end
+      message.chomp!
+      text_to_take_pills(message)
     end
-
-    print message.chomp
   end
 end
