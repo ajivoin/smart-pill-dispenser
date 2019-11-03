@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/pill/new', to: 'pill#new'
   put '/pill', to: 'pill#create'
   get '/history(/:pill)', to: 'pill#history', as: 'history'
+  get '/pill/:id/edit', to: 'pill#edit', as: 'edit_pill'
+  post '/pill/:id/edit', to: 'pill#update', as: 'update_pill'
 
   root to: 'schedule#show'
 
