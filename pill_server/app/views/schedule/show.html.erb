@@ -3,11 +3,11 @@
 <ul class="nav nav-tabs">
     <% Pill.all.each_with_index do |p, i| %>
         <li class="nav-item">
-            <a onClick="pillNav(<%= p.id %>) "id="pill-nav-<%= p.id %>"class="nav-link <%= "active" if (params[:pill].nil? && i == 0) || (!params[:pill].nil? && params[:pill].to_i == p.id)%>"><%= p.name %></a>
+            <a onClick="pillNav(<%= p.id %>) "id="pill-nav-<%= p.id %>"class="nav-link nav-link-2 <%= "active" if (params[:pill].nil? && i == 0) || (!params[:pill].nil? && params[:pill].to_i == p.id)%>"><%= p.name %></a>
         </li>
     <% end %>
     <li class="nav-item">
-        <a href="/pill/new" class="nav-link"> + New Pill</a>
+        <a href="/pill/new" class="nav-link nav-link-2"> + New Pill</a>
     </li>
 </ul>
 
@@ -145,11 +145,11 @@
         width: 60px;
     }
 
-    .nav-link {
+    .nav-link-2 {
         color: #007bff !important;
     }
 
-    .nav-link.active {
+    .nav-link-2.active {
         color: #212529 !important;
     }
 

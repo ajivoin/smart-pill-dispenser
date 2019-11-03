@@ -1,0 +1,24 @@
+<h3><%= "#{Pill.find_by(id: params[:pill]).name } - " if params.has_key?(:pill) %>History</h3>
+<% if params.has_key?(:pill) %><a href="/history"><- full history</a><% end %>
+<br/>
+<br/>
+<table class="table">
+    <thead class="">
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Medication</th>
+            <th scope="col">Taken</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @histories.each do |h| %>
+            <tr>
+                <td><%= in_our_timezone(h.time).strftime("%m/%d/%Y")%></td>
+                <td><%= in_our_timezone(h.time).strftime("%l:%M %P")%></td>
+                <td><%= link_to h.pill.name, history_url(pill: h.pill) %></td>
+                <td><span style="padding: 4px 12px;" class="alert <%= h.taken ? "alert-light" : "alert-danger" %>"><%= h.taken ? "Taken" : "Not Taken" %></span></td>
+            </tr>
+        <% end %>
+    <tbody>
+</table>
