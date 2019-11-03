@@ -16,10 +16,10 @@ module TimeHelper
     end
 
     def day_of_week(num)
-        num == Time.now.wday
+        num == in_our_timezone(Time.now).wday
     end
 
     def in_our_timezone(time)
-        time.in_time_zone("America/New_York")
+        Time.local(*time.to_a)
     end
 end
