@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2019_11_02_234046) do
+ActiveRecord::Schema.define(version: 2019_11_03_030257) do
 
   create_table "histories", force: :cascade do |t|
     t.boolean "taken"
@@ -20,6 +19,12 @@ ActiveRecord::Schema.define(version: 2019_11_02_234046) do
     t.datetime "time"
     t.integer "pill_id"
     t.index ["pill_id"], name: "index_histories_on_pill_id"
+  end
+
+  create_table "jonny_bois", force: :cascade do |t|
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pills", force: :cascade do |t|
