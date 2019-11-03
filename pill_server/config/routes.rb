@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   delete '/schedule/:id', to: 'schedule#remove'
   get '/pill/new', to: 'pill#new'
   put '/pill', to: 'pill#create'
+  get '/pill/counts', to: 'pill#get_pill_counts'
+  get '/pill/taken/:taken', to: 'pill#post_taken'
   get '/history(/:pill)', to: 'pill#history', as: 'history'
   get '/pill/:id/edit', to: 'pill#edit', as: 'edit_pill'
   post '/pill/:id/edit', to: 'pill#update', as: 'update_pill'
