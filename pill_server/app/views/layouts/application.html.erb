@@ -15,7 +15,7 @@
       let path = window.location.href;
       window.location.href = path.split('X')[0] + path.split('X')[2];
     </script>
-  <% end %>
+  <% else %>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Smart Pills</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
     <div class="container-fluid" style="padding: 30px 100px 0">
       <%= yield %>
     </div>
-    
+  <% end %>  
   </body>
 </html>
 
