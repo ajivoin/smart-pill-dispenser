@@ -24,10 +24,13 @@ namespace :batch do
           schedule: schedule
         )
 
+        # TODO: Decrement counts
         day = Time.now.wday
+        day_count = schedule['day' + day.to_s].to_i
+        schedule.pill.update(count: schedule.pill.count - day_count)
 
         JonnyBoi.create(
-          count: schedule['day' + day.to_s].to_i
+          count: day_count
         )
       end
       message.chomp!

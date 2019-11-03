@@ -13,6 +13,12 @@ class PillController < ApplicationController
         render :json => data
     end
 
+    # Only POST an integer please. Thank you. Have a great day.
+    def post_taken
+        # Need to set all outstanding pills as taken
+        History.where(taken: false).update_all(taken: true) if params[:taken].to_i == 1
+    end
+
     def create
         @p = Pill.new
         @p.name = params[:name]

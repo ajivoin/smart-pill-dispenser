@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/pill/new', to: 'pill#new'
   put '/pill', to: 'pill#create'
   get '/pill/counts', to: 'pill#get_pill_counts'
+  post '/pill/taken', to: 'pill#post_taken'
 
   root to: 'schedule#show'
 
