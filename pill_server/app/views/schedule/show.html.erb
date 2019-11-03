@@ -1,10 +1,151 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h1>Hi!</h1>
-        </div>
-        <div class="col-md-6">
-            <h1>World!</h1>
-        </div>
+
+
+<ul class="nav nav-tabs">
+    <% Pill.all.each_with_index do |p, i| %>
+        <li class="nav-item">
+            <a onClick="pillNav(<%= p.id %>) "id="pill-nav-<%= p.id %>"class="nav-link <%= "active" if (params[:pill].nil? && i == 0) || (!params[:pill].nil? && params[:pill].to_i == p.id)%>"><%= p.name %></a>
+        </li>
+    <% end %>
+    <li class="nav-item">
+        <a href="/pill/new" class="nav-link"> + New Pill</a>
+    </li>
+</ul>
+
+<br/>
+
+<% Pill.all.each_with_index do |p, i| %>
+    <div class="pill-container <%= "hidden" if (params[:pill].nil? && i != 0) || (!params[:pill].nil? && params[:pill].to_i != p.id)  %>" id="pill-<%= p.id %>">
+    <h3><%= p.name %></h3>
+    <div class="alert <%= alert_type(p) %>" role="alert">
+        <%= alert_text(p) %>
     </div>
-</div>
+    <br/>
+    <table class="table table-striped">
+        <thead class="">
+            <tr>
+                <th style="width: 10%" scope="col">Time</th>
+                <th style="width: 10%" scope="col" class="<%= "today" if day_of_week(0) %>">Sun</th>
+                <th style="width: 10%" scope="col" class="<%= "today" if day_of_week(1) %>">Mon</th>
+                <th style="width: 10%" scope="col" class="<%= "today" if day_of_week(2) %>">Tue</th>
+                <th style="width: 10%" scope="col" class="<%= "today" if day_of_week(3) %>">Wed</th>
+                <th style="width: 10%" scope="col" class="<%= "today" if day_of_week(4) %>">Thu</th>
+                <th style="width: 10%" scope="col" class="<%= "today" if day_of_week(5) %>">Fri</th>
+                <th style="width: 10%" scope="col" class="<%= "today" if day_of_week(6) %>">Sat</th>
+                <th style="width: 20%" scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% p.schedules.sort_by{|x| x.time }.each do |s| %>
+                <tr class="s-show" id="s-show-<%= s.id %>">
+                    <td><%= time_format(s.time) %></td>
+                    <td><%= s.day0 %></td>
+                    <td><%= s.day1 %></td>
+                    <td><%= s.day2 %></td>
+                    <td><%= s.day3 %></td>
+                    <td><%= s.day4 %></td>
+                    <td><%= s.day5 %></td>
+                    <td><%= s.day6 %></td>
+                    <td><button class="btn btn-sm btn-outline-secondary" onClick="editSchedule(<%= s.id %>)">Edit</button></td>
+                </tr>
+                <tr class="hidden"></tr>
+                <tr class="s-edit hidden" id="s-edit-<%= s.id %>">
+                    <%= form_with(url: "/schedule/#{s.id}", method: "post") do |f|%>
+                        <td><%= f.time_select :time, default: {hour: h_format(s.time), min: m_format(s.time)}, class: "form-control" %></td>
+                        <td><%= number_field_tag('day0', "#{s.day0}", min: 0, class: "pill-count-field form-control") %></td>
+                        <td><%= number_field_tag('day1', "#{s.day1}", min: 0, class: "pill-count-field form-control") %></td>
+                        <td><%= number_field_tag('day2', "#{s.day2}", min: 0, class: "pill-count-field form-control") %></td>
+                        <td><%= number_field_tag('day3', "#{s.day3}", min: 0, class: "pill-count-field form-control") %></td>
+                        <td><%= number_field_tag('day4', "#{s.day4}", min: 0, class: "pill-count-field form-control") %></td>
+                        <td><%= number_field_tag('day5', "#{s.day5}", min: 0, class: "pill-count-field form-control") %></td>
+                        <td><%= number_field_tag('day6', "#{s.day6}", min: 0, class: "pill-count-field form-control") %></td>
+                        <td><%= submit_tag("Save", class: "btn btn-sm btn-primary", ) %>
+                        <%= form_with(url: "/schedule/#{s.id}", method: "delete") do |f| %>
+                            <%= submit_tag("Remove", class: "btn btn-sm btn-danger") %>
+                        <% end %>
+                        <a onClick="cancelScheduleEdit(<%= s.id %>)" class="btn btn-sm btn-outline-secondary">Cancel</a></td>
+                    <% end %>
+                </tr>
+            <% end %>
+            <tr class="s-new hidden" id="s-new-<%= p.id %>">
+                <%= form_with(url: "/pill/#{p.id}", method: "put") do |f|%>
+                    <td><%= f.time_select :time, default: {hour: 12, min: 00}, class: "form-control" %></td>
+                    <td><%= number_field_tag('day0', "0", min: 0, class: "pill-count-field form-control") %></td>
+                    <td><%= number_field_tag('day1', "0", min: 0, class: "pill-count-field form-control") %></td>
+                    <td><%= number_field_tag('day2', "0", min: 0, class: "pill-count-field form-control") %></td>
+                    <td><%= number_field_tag('day3', "0", min: 0, class: "pill-count-field form-control") %></td>
+                    <td><%= number_field_tag('day4', "0", min: 0, class: "pill-count-field form-control") %></td>
+                    <td><%= number_field_tag('day5', "0", min: 0, class: "pill-count-field form-control") %></td>
+                    <td><%= number_field_tag('day6', "0", min: 0, class: "pill-count-field form-control") %></td>
+                    <td><%= submit_tag("Add", class: "btn btn-sm btn-primary") %>
+                    <a onClick="cancelNewSchedule(<%= p.id %>)" class="btn btn-sm btn-outline-secondary">Cancel</a></td>
+                <% end %>
+            </tr>
+            
+        </tbody>
+    </table>
+    <p id="s-new-text-<%= p.id %>" onClick="newSchedule(<%= p.id %>)" class="text-center">Add a Time</p>
+    <br/><br/>
+    </div>
+<% end %>
+
+<script>
+    function editSchedule(id) {
+        Array.from(document.getElementsByClassName("s-show")).forEach(l => {
+            l.classList.remove("hidden");
+        });
+        Array.from(document.getElementsByClassName("s-edit")).forEach(l => {
+            l.classList.add("hidden");
+        });
+        document.getElementById("s-show-"+id).classList.add("hidden");
+        document.getElementById("s-edit-"+id).classList.remove("hidden");
+    }
+
+    function cancelScheduleEdit(id) {
+        document.getElementById("s-edit-"+id).classList.add("hidden");
+        document.getElementById("s-show-"+id).classList.remove("hidden");
+    }
+
+    function newSchedule(id) {
+        document.getElementById("s-new-text-"+id).classList.add("hidden");
+        document.getElementById("s-new-"+id).classList.remove("hidden");
+    }
+
+    function cancelNewSchedule(id) {
+       document.getElementById("s-new-"+id).classList.add("hidden");
+        document.getElementById("s-new-text-"+id).classList.remove("hidden");
+    }
+
+    function pillNav(id) {
+        Array.from(document.getElementsByClassName("nav-link")).forEach(l => {
+            l.classList.remove("active");
+        });
+        Array.from(document.getElementsByClassName("pill-container")).forEach(l => {
+            l.classList.add("hidden");
+        });
+        document.getElementById("pill-nav-"+id).classList.add("active");
+        document.getElementById("pill-"+id).classList.remove("hidden");
+    }
+</script>
+
+<style>
+    .hidden {
+        display: none;
+    }
+
+    .pill-count-field {
+        width: 60px;
+    }
+
+    .nav-link {
+        color: #007bff !important;
+    }
+
+    .nav-link.active {
+        color: #212529 !important;
+    }
+
+    .today {
+        //text-decoration: underline;
+        color: #007bff
+    }
+</style>
