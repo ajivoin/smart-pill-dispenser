@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -62,4 +64,40 @@ Schedule.create(
     day4: 0,
     day5: 0,
     day6: 0,
+)
+
+p = Pill.create(
+  name: 'Joe Papa',
+  count: 500
+)
+
+q = Pill.create(
+  name: 'Joe QQapa',
+  count: 500
+)
+
+Schedule.create(
+  time: 24 * 60 / 2,
+  day0: 1,
+  day1: 2,
+  day2: 1,
+  day3: 1,
+  day4: 1,
+  day5: 1,
+  day6: 1,
+  pill: p,
+  active: true
+)
+
+Schedule.create(
+  time: 24 * 60 / 2 - 1,
+  day0: 1,
+  day1: 2,
+  day2: 1,
+  day3: 1,
+  day4: 1,
+  day5: 1,
+  day6: 1,
+  pill: q,
+  active: true
 )

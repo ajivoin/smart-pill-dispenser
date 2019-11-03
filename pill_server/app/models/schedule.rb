@@ -1,4 +1,6 @@
+# frozen_string_literal: true
+
 class Schedule < ApplicationRecord
-    belongs_to :pill
-    has_many :histories
+  belongs_to :pill
+  has_many :histories
 end

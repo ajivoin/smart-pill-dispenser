@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScheduleController < ApplicationController
   def show
   end
@@ -36,4 +38,8 @@ class ScheduleController < ApplicationController
     @schedule.destroy
     redirect_to schedule_url(pill: @schedule.pill.id)
   end 
+
+  def reply
+  end
+
 end

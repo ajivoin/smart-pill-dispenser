@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_02_234046) do
+
+ActiveRecord::Schema.define(version: 2019_11_02_191414) do
+
+  create_table "histories", force: :cascade do |t|
+    t.integer "week"
+    t.boolean "taken"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "schedule_id"
+    t.index ["schedule_id"], name: "index_histories_on_schedule_id"
+  end
 
   create_table "pills", force: :cascade do |t|
     t.string "name"
