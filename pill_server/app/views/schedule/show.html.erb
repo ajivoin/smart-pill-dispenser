@@ -75,7 +75,7 @@
                     <a onClick="cancelScheduleEdit(<%= s.id %>)" class="btn btn-sm btn-outline-secondary">Cancel</a></td>
                 </tr>
             <% end %>
-            <tr class="s-new hidden" id="s-new-<%= p.id %>">
+            <tr class="s-new <%= "hidden" if !p.schedules.empty? %>" id="s-new-<%= p.id %>">
                 <%= form_with(url: "/pill/#{p.id}", method: "put") do |f|%>
                     <td><%= f.time_select :time, default: {hour: 12, min: 00}, class: "form-control" %></td>
                     <td><%= number_field_tag('day0', "0", min: 0, class: "pill-count-field form-control") %></td>
@@ -86,13 +86,13 @@
                     <td><%= number_field_tag('day5', "0", min: 0, class: "pill-count-field form-control") %></td>
                     <td><%= number_field_tag('day6', "0", min: 0, class: "pill-count-field form-control") %></td>
                     <td><%= submit_tag("Add", class: "btn btn-sm btn-primary") %>
-                    <a onClick="cancelNewSchedule(<%= p.id %>)" class="btn btn-sm btn-outline-secondary">Cancel</a></td>
+                    <a onClick="cancelNewSchedule(<%= p.id %>)" class="btn btn-sm btn-outline-secondary <%= "hidden" if p.schedules.empty? %>">Cancel</a></td>
                 <% end %>
             </tr>
             
         </tbody>
     </table>
-    <p id="s-new-text-<%= p.id %>" onClick="newSchedule(<%= p.id %>)" class="text-center">Add a Time</p>
+    <p id="s-new-text-<%= p.id %>" onClick="newSchedule(<%= p.id %>)" class="text-center <%= "hidden" if p.schedules.empty? %>">Add a Time</p>
     <br/><br/>
     </div>
 <% end %>
