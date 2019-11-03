@@ -75,3 +75,6 @@ gem 'rubocop'
 
 # Twilio
 gem 'twilio-ruby'
+
+# Observers
+gem 'rails-observers'

@@ -1,0 +1,19 @@
+<h3>Edit Pill</h3>
+
+
+<%= form_with(url: "/pill/#{@p.id}/edit", method: "post") do |f|%>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <%= text_field_tag(:name,@p.name, class: "form-control") %>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <%= text_area_tag(:desc,@p.desc, class: "form-control") %>
+  </div>
+  <div class="form-group">
+    <label for="description">Pill Count</label>
+    <%= number_field_tag('count',@p.count.to_s, min: 0, class: "form-control") %>
+  </div>
+  <%=hidden_field_tag(:id,@p.id)%>
+  <%= submit_tag("Save", class: "btn btn-primary") %>
+<% end %>

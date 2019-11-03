@@ -3,11 +3,11 @@
 <ul class="nav nav-tabs">
     <% Pill.all.each_with_index do |p, i| %>
         <li class="nav-item">
-            <a onClick="pillNav(<%= p.id %>) "id="pill-nav-<%= p.id %>"class="nav-link <%= "active" if (params[:pill].nil? && i == 0) || (!params[:pill].nil? && params[:pill].to_i == p.id)%>"><%= p.name %></a>
+            <a onClick="pillNav(<%= p.id %>) "id="pill-nav-<%= p.id %>"class="nav-link nav-link-2 <%= "active" if (params[:pill].nil? && i == 0) || (!params[:pill].nil? && params[:pill].to_i == p.id)%>"><%= p.name %></a>
         </li>
     <% end %>
     <li class="nav-item">
-        <a href="/pill/new" class="nav-link"> + New Pill</a>
+        <a href="/pill/new" class="nav-link nav-link-2"> + New Pill</a>
     </li>
 </ul>
 
@@ -15,9 +15,25 @@
 
 <% Pill.all.each_with_index do |p, i| %>
     <div class="pill-container <%= "hidden" if (params[:pill].nil? && i != 0) || (!params[:pill].nil? && params[:pill].to_i != p.id)  %>" id="pill-<%= p.id %>">
-    <h3><%= p.name %></h3>
-    <div class="alert <%= alert_type(p) %>" role="alert">
-        <%= alert_text(p) %>
+    <div class="row align-items-center">
+        <div class="col">
+            <h3><%= p.name %></h3>
+        </div>
+        <div class="col-auto justify-content-end">
+            <%=link_to "Edit", edit_pill_path(p)%>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="alert <%= alert_type(p) %>" role="alert">
+                <%= alert_text(p) %>
+            </div>
+        </div>
+        <div class="col">
+            <div class="alert">
+                <%=p.desc%>
+            </div>
+        </div>
     </div>
     <br/>
     <table class="table table-striped">
@@ -136,11 +152,11 @@
         width: 60px;
     }
 
-    .nav-link {
+    .nav-link-2 {
         color: #007bff !important;
     }
 
-    .nav-link.active {
+    .nav-link-2.active {
         color: #212529 !important;
     }
 

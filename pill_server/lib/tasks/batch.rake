@@ -18,10 +18,9 @@ namespace :batch do
       active_schedules.each do |schedule|
         message += schedule.pill.name + "\n"
         History.create(
-          # TODO: Need to properly calculate week number
-          week: 0, # Need to figure out how to get current week
+          time: Time.now,
           taken: false,
-          schedule: schedule
+          pill: schedule.pill
         )
 
         # TODO: Decrement counts
@@ -41,19 +40,24 @@ namespace :batch do
 
     # Send reminders for untaken pills
 
-    reminder_schedules = Schedule.where(active: true, time: current_minutes - 1)
+     # reminder_schedules = Schedule.where(active: true, time: current_minutes - 1)
 
-    if reminder_schedules.present?
-      potential_reminders = History.where(
-        taken: false,
-        schedule: reminder_schedules
-      )
-    end
+    # if reminder_schedules.present?
+    #   potential_reminders = History.where(
+    #     taken: false,
+    #     schedule: reminder_schedules
+    #   )
+    # end
+
+    potential_reminders = History.where(
+      taken: false,
+      time: 5.minutes.ago..1.minutes.ago
+    )
 
     if potential_reminders.present?
       message += "\n\nYou still haven't taken these pills:\n"
       potential_reminders.each do |history|
-        message += history.schedule.pill.name + "\n"
+        message += history.pill.name + "\n"
       end
       message.chomp!
       text_to_take_pills(message)
