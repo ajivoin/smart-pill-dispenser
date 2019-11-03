@@ -5,20 +5,22 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 2.6.3
 
-* System dependencies
+* System dependencies: Linux for crontab support
 
-* Configuration
-
-* Database creation
+* Configuration:
+  * `bundle install`
+  * Add Twilio security keys to `config/secrets.yml`
 
 * Database initialization
+  * `rails db:migrate`
+  * Optional: `rails db:seed`
+    * This provides test data
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
+* Services
+  * Update cron job with `whenever --update-cron`
 
 * Deployment instructions
-
-* ...
+  * Run `rails server`
+  
