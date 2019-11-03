@@ -57,13 +57,13 @@ class ScheduleController < ApplicationController
     time = in_our_timezone(Time.now)
     current_minutes = (time.seconds_since_midnight / 60).to_i
 
-    @next = "Nothing"
+    @next = "tomorrow"
     schedules.each do |s|
       if s.time > current_minutes - 60
         @next = time_format(s.time)
       end
     end
-    
+
     render layout: false
   end
 
