@@ -16,8 +16,17 @@
 <% Pill.all.each_with_index do |p, i| %>
     <div class="pill-container <%= "hidden" if (params[:pill].nil? && i != 0) || (!params[:pill].nil? && params[:pill].to_i != p.id)  %>" id="pill-<%= p.id %>">
     <h3><%= p.name %></h3>
-    <div class="alert <%= alert_type(p) %>" role="alert">
-        <%= alert_text(p) %>
+    <div class="row">
+        <div class="col">
+            <div class="alert <%= alert_type(p) %>" role="alert">
+                <%= alert_text(p) %>
+            </div>
+        </div>
+        <div class="col">
+            <div class="alert">
+                <%=p.desc%>
+            </div>
+        </div>
     </div>
     <br/>
     <table class="table table-striped">

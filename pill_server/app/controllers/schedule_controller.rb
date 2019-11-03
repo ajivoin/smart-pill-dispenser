@@ -15,7 +15,7 @@ class ScheduleController < ApplicationController
     @schedule.day5 = params[:day5]
     @schedule.day6 = params[:day6]
     @schedule.save
-    redirect_to schedule_url(pill: @schedule.pill.id)
+    redirect_to schedule_path(pill: @schedule.pill.id)
   end
 
   def new
@@ -30,13 +30,13 @@ class ScheduleController < ApplicationController
     @schedule.day5 = params[:day5]
     @schedule.day6 = params[:day6]
     @schedule.save
-    redirect_to schedule_url(pill: @schedule.pill.id)
+    redirect_to schedule_path(pill: @schedule.pill.id)
   end
 
   def remove 
     @schedule = Schedule.find_by(id: params[:id])
     @schedule.destroy
-    redirect_to schedule_url(pill: @schedule.pill.id)
+    redirect_to schedule_path(pill: @schedule.pill.id)
   end 
 
   def reply
