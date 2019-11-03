@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/history(/:pill)', to: 'pill#history', as: 'history'
   get '/pill/:id/edit', to: 'pill#edit', as: 'edit_pill'
   post '/pill/:id/edit', to: 'pill#update', as: 'update_pill'
+  get '/next', to: 'schedule#next'
 
   root to: 'schedule#show'
 
