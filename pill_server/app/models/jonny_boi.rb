@@ -1,0 +1,2 @@
+class JonnyBoi < ApplicationRecord
+end

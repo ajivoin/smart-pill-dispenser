@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete '/schedule/:id', to: 'schedule#remove'
   get '/pill/new', to: 'pill#new'
   put '/pill', to: 'pill#create'
+  get '/pill/counts', to: 'pill#get_pill_counts'
 
   root to: 'schedule#show'
 

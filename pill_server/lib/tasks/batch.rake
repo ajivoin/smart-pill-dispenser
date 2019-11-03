@@ -23,6 +23,12 @@ namespace :batch do
           taken: false,
           schedule: schedule
         )
+
+        day = Time.now.wday
+
+        JonnyBoi.create(
+          count: schedule['day' + day.to_s].to_i
+        )
       end
       message.chomp!
       text_to_take_pills(message)
