@@ -10,10 +10,23 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark bg-dark">
-      <h3 class="text-white h2">Smart Pills</h3>
-      
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Smart Pills</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/schedule">Schedule</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/history">History</a>
+          </li>
+        </ul>
+      </div>
     </nav>
+    
     <div class="container-fluid" style="padding: 30px 100px 0">
       <%= yield %>
     </div>

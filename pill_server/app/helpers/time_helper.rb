@@ -17,5 +17,9 @@ module TimeHelper
 
     def day_of_week(num)
         num == Time.now.wday
-    end      
+    end
+
+    def in_our_timezone(time)
+        time.in_time_zone("America/New_York")
+    end
 end

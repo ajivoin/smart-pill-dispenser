@@ -101,3 +101,35 @@ Schedule.create(
   pill: q,
   active: true
 )
+
+History.create(
+    pill: blue,
+    time: DateTime.now,
+    taken: false
+)
+
+History.create(
+    pill: blue,
+    time: 40.minutes.ago,
+    taken: true
+)
+
+
+History.create(
+    pill: blue,
+    time: 22.minutes.ago,
+    taken: true
+)
+
+History.create(
+    pill: red,
+    time: 2.minutes.ago,
+    taken: false
+)
+
+
+History.create(
+    pill: red,
+    time: 32.minutes.ago,
+    taken: true
+)
