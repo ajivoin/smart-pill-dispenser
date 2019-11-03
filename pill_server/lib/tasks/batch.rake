@@ -6,8 +6,8 @@ namespace :batch do
   task send_messages: :environment do
 
     # When live, switch to commented out line
-    # current_minutes = (Time.now.seconds_since_midnight / 60).to_i
-    current_minutes = 24 * 60 / 2 # hard coded to noon because I want to test stuff
+    current_minutes = (Time.now.seconds_since_midnight / 60).to_i
+    # current_minutes = 24 * 60 / 2 # hard coded to noon because I want to test stuff
 
     active_schedules = Schedule.where(active: true, time: current_minutes)
     
