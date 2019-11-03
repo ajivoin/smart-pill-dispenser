@@ -17,6 +17,7 @@ class PillController < ApplicationController
     def post_taken
         # Need to set all outstanding pills as taken
         History.where(taken: false).update_all(taken: true) if params[:taken].to_i == 1
+        render :json => 'success'
     end
 
     def create
