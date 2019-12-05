@@ -9,7 +9,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 blue = Pill.create(
-    name: "Blue Pill",
+    name: "Blue",
     count: 5
 )
 
@@ -67,12 +67,12 @@ Schedule.create(
 )
 
 p = Pill.create(
-  name: 'Joe Papa',
+  name: 'Ibuprofen',
   count: 500
 )
 
 q = Pill.create(
-  name: 'Joe QQapa',
+  name: 'Zyrtec',
   count: 500
 )
 
@@ -102,34 +102,3 @@ Schedule.create(
   active: true
 )
 
-History.create(
-    pill: blue,
-    time: DateTime.now,
-    taken: false
-)
-
-History.create(
-    pill: blue,
-    time: 40.minutes.ago,
-    taken: true
-)
-
-
-History.create(
-    pill: blue,
-    time: 22.minutes.ago,
-    taken: true
-)
-
-History.create(
-    pill: red,
-    time: 2.minutes.ago,
-    taken: false
-)
-
-
-History.create(
-    pill: red,
-    time: 32.minutes.ago,
-    taken: true
-)

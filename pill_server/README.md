@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: 2.6.3
 
-Things you may want to cover:
+* System dependencies: Linux for crontab support
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
+* Configuration:
+  * `bundle install`
+  * Add Twilio security keys to `config/secrets.yml`
 
 * Database initialization
+  * `rails db:migrate`
+  * Optional: `rails db:seed`
+    * This provides test data
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
+* Services
+  * Update cron job with `whenever --update-cron`
 
 * Deployment instructions
-
-* ...
+  * Run `rails server`
+  

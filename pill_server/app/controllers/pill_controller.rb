@@ -10,12 +10,13 @@ class PillController < ApplicationController
             JonnyBoi.destroy(jonny_boi.id)
         end
         
-        render :json => data
+        render :json => data.shuffle
     end
 
     # Only POST an integer please. Thank you. Have a great day.
     def post_taken
         # Need to set all outstanding pills as taken
+        puts 'HI' + params[:taken]
         History.where(taken: false).update_all(taken: true) if params[:taken].to_i == 1
         render :json => 'success'
     end
@@ -46,7 +47,7 @@ class PillController < ApplicationController
         @p.desc = params[:desc]
         @p.count = params[:count].to_i
         @p.save
-        redirect_to root_path(pill: @p.id)
+        redirect_to root_url('Xforce_reload': 'trueX', pill: @p.id)
     end
     
 end
